@@ -11,3 +11,17 @@ resource "proxmox_virtual_environment_network_linux_bridge" "this" {
   address    = each.value.address
   gateway    = each.value.gateway
 }
+
+resource "proxmox_virtual_environment_network_linux_vlan" "this" {
+  for_each = var.vlans
+
+  node_name = var.node_name
+  name      = each.key
+  interface = each.value.interface
+  vlan      = each.value.vlan
+  autostart = each.value.autostart
+  mtu       = each.value.mtu
+  comment   = each.value.comment
+  address   = each.value.address
+  gateway   = each.value.gateway
+}
